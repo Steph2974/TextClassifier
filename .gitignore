@@ -1,0 +1,4 @@
+bert/
+temp/
+*.pyc
+__pycache__/
