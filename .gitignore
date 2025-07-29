@@ -1,4 +1,7 @@
 bert/
-temp/
 *.pyc
 __pycache__/
+logs/
+models*
+qwen*
+temp*

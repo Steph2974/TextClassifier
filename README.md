@@ -3,6 +3,17 @@
 ## 问题
 
 1. 怎么只有两种分类？['正常-normal' '色情-sex word']
+2. bert可以把训练批次设置为64，'BATCH_SIZE = 64'，但是bge不行，会内存不够。
+3. 警告：警告信息是由于 Hugging Face 的 tokenizers 在进程被 fork 后，启用了并行处理。为了避免潜在的死锁，它会自动禁用并行处理。
+解决方法：在运行 Python 脚本之前，在命令行中设置环境变量 export TOKENIZERS_PARALLELISM=false
+4. 很慢。比如 Epoch 1/15:   1%|     | 5/769 [07:51<19:59:50, 94.23s/it, Loss=1.9651, Avg_Loss=1.2995, Batch=5/769、Epoch 1/15:   0%|   | 6/3073 [04:57<40:22:19, 47.39s/it, Loss=1.2613, Avg_Loss=1.2264, Batch=6/3073]
+5. 没有训练效果。损失函数没有变化、准确率没有变化。应该也是选错了模型。
+6. 纹丝不动。
+Epoch 1/15: 100%|████| 769/769 [02:57<00:00,  4.32it/s, Loss=0.1653, Avg_Loss=0.5192, Batch=769/769]
+Epoch 2/15: 100%|████| 769/769 [02:56<00:00,  4.37it/s, Loss=0.1380, Avg_Loss=0.5186, Batch=769/769]
+Epoch 3/15: 100%|████| 769/769 [02:56<00:00,  4.37it/s, Loss=0.2650, Avg_Loss=0.5167, Batch=769/769]
+Epoch 4/15:  40%|█▌  | 306/769 [01:11<01:26,  5.37it/s, Loss=0.8758, Avg_Loss=0.5212, Batch=306/769]
+
 
 ## 术语解释
 
@@ -18,3 +29,8 @@
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;
 huggingface-cli download --resume-download google-bert/bert-base-chinese --local-dir bert
+
+huggingface-cli download --resume-download Qwen/Qwen3-4B-Base --local-dir qwen 
+
+通过设置环境变量 TOKENIZERS_PARALLELISM 来禁用并行处理：
+export TOKENIZERS_PARALLELISM=false
